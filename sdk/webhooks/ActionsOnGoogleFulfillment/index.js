@@ -22,7 +22,7 @@ const functions = require('firebase-functions');
 
 const INSTRUCTIONS = 'Do you want me to change color or pause spinning?';
 
-const CANVAS_URL = 'https://PROJECT_ID.web.app';
+const CANVAS_URL = 'https://test-canvas-2-54e3b.firebaseapp.com';
 
 const tints = {
   black: 0x000000,
@@ -51,7 +51,7 @@ app.handle('welcome', (conv) => {
     conv.scene.next.name = 'actions.page.END_CONVERSATION';
     return;
   }
-  conv.add('Welcome! Do you want me to change color or pause spinning? ' +
+  conv.add('Welcome to Elder Tree! Do you want me to change color or pause spinning? ' +
     'You can also tell me to ask you later.');
   conv.add(new Canvas({
     // Update this placeholder string with the URL for your canvas web app.

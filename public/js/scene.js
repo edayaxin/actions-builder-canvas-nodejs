@@ -107,6 +107,17 @@ export class Scene {
     this.button.buttonMode = true;
     this.button.on('pointerdown', this.handleRestartGame);
     this.stage.addChild(this.button);
+
+    const textureText = PIXI.Texture
+        .fromImage('./elder_tree_text.png');
+    this.textBtn = new PIXI.Sprite(textureText);
+    this.textBtn.scale.set(1);
+    this.textBtn.textureButton = textureText;
+    this.textBtn.x = 200;
+    this.textBtn.y = 200;
+    this.textBtn.interactive = false;
+    this.textBtn.buttonMode = false;
+    this.stage.addChild(this.textBtn);
   }
 
   /**

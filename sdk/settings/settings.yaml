@@ -16,12 +16,12 @@ defaultLocale: en
 localizedSettings:
   developerEmail:
   developerName:
-  displayName: Interactive canvas sample
+  displayName: Elder Tree interactive canvas test
   fullDescription:
   privacyPolicyUrl:
-  pronunciation: Interactive canvas sample
+  pronunciation: Elder Tree interactive canvas test
   shortDescription:
   smallLogoImage:
   termsOfServiceUrl:
-projectId: <PROJECT_ID>
+projectId: test-canvas-2-54e3b
 usesInteractiveCanvas: true
