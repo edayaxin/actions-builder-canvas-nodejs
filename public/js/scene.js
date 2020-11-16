@@ -17,6 +17,7 @@
 /**
  * Represent Triangle scene
  */
+var background_idx = 0;
 export class Scene {
   /**
    * Initializes the game with visual components.
@@ -44,9 +45,9 @@ export class Scene {
 
     // center stage and normalize scaling for all resolutions
     this.stage = new PIXI.Container();
-    this.stage.position.set(view.clientWidth / 2, view.clientHeight / 2);
-    this.stage.scale.set(Math.max(this.renderer.width,
-        this.renderer.height) / 1024);
+    // this.stage.position.set(view.clientWidth / 2, view.clientHeight / 2);
+    // this.stage.scale.set(Math.max(this.renderer.width,
+    //     this.renderer.height) / 1024);
 
     // load a sprite from a svg file
     this.sprite = PIXI.Sprite.from('triangle.svg');
@@ -55,11 +56,63 @@ export class Scene {
     this.sprite.spin = true;
     this.stage.addChild(this.sprite);
 
+
     // toggle spin on touch events of the triangle
     this.sprite.interactive = true;
     this.sprite.buttonMode = true;
+
+
+    const survey_start_text = PIXI.Texture
+        .fromImage('./prototype_survey/survey_start.png');
+    const blood_ask_text = PIXI.Texture
+        .fromImage('./prototype_survey/blood_ask.png');
+    const blood_confirm_text = PIXI.Texture
+        .fromImage('./prototype_survey/blood_confirm.png');
+
+    const blood_ask2_text = PIXI.Texture
+        .fromImage('./prototype_survey/blood_ask2.png');
+    const blood_confirm2_text = PIXI.Texture
+        .fromImage('./prototype_survey/blood_confirm2.png');
+
+    const sleep_ask_text = PIXI.Texture
+        .fromImage('./prototype_survey/sleep_ask.png');
+    const sleep_confirm_text = PIXI.Texture
+        .fromImage('./prototype_survey/sleep_confirm.png');
+    const pain_ask_text = PIXI.Texture
+        .fromImage('./prototype_survey/pain_ask.png');
+    const pain_confirm_text = PIXI.Texture
+        .fromImage('./prototype_survey/pain_confirm.png');
+
+    const done_survey_text = PIXI.Texture
+        .fromImage('./prototype_survey/done_survey.png');
+    const survey_summary_text = PIXI.Texture
+        .fromImage('./prototype_survey/survey_summary.png');
+    const finish_survey_text = PIXI.Texture
+        .fromImage('./prototype_survey/finish_survey.png');
+    const sent_to_doctor_text = PIXI.Texture
+        .fromImage('./prototype_survey/sent_to_doctor.png');
+
+
+    this.background_texts = [survey_start_text, blood_ask_text, blood_confirm_text,
+                            blood_ask2_text, blood_confirm2_text, sleep_ask_text,
+                            sleep_confirm_text, pain_ask_text, pain_confirm_text, done_survey_text,
+                            survey_summary_text, finish_survey_text, sent_to_doctor_text];
+
+    this.demoBackground = new PIXI.Sprite(this.background_texts[background_idx]);
+    this.next_background = false;
+    this.demoBackground.scale.set(1);
+
+    this.demoBackground.x = 0;
+    this.demoBackground.y = 0;
+    this.demoBackground.interactive = false;
+    this.demoBackground.buttonMode = false;
+    this.stage.addChild(this.demoBackground);
+
     this.sprite.on('pointerdown', () => {
       this.sprite.spin = !this.sprite.spin;
+      background_idx = background_idx + 1;
+      // console.log(background_idx);
+      this.demoBackground.texture = this.background_texts[background_idx];
     });
 
     let last = performance.now();
@@ -76,6 +129,12 @@ export class Scene {
         this.sprite.rotation += delta / 1000;
       }
 
+      if (this.next_background && background_idx < (this.background_texts.length - 1)) {
+        background_idx = background_idx + 1;
+        // console.log(background_idx);
+        this.demoBackground.texture = this.background_texts[background_idx];
+        this.next_background = false;
+      }
       last = now;
 
       this.renderer.render(this.stage);
@@ -108,16 +167,6 @@ export class Scene {
     this.button.on('pointerdown', this.handleRestartGame);
     this.stage.addChild(this.button);
 
-    const textureText = PIXI.Texture
-        .fromImage('./elder_tree_text.png');
-    this.textBtn = new PIXI.Sprite(textureText);
-    this.textBtn.scale.set(1);
-    this.textBtn.textureButton = textureText;
-    this.textBtn.x = 200;
-    this.textBtn.y = 200;
-    this.textBtn.interactive = false;
-    this.textBtn.buttonMode = false;
-    this.stage.addChild(this.textBtn);
   }
 
   /**

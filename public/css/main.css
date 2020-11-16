@@ -23,7 +23,8 @@ body {
   display: flex;
   flex: 1;
   margin: 0;
-  background-color: #F5F5F5;
+  /* background-color: #F5F5F5; */
+  background-image: url('elder_tree_text.png');
 }
 
 .view {
@@ -33,7 +34,8 @@ body {
 
 canvas {
   display: block;
-  background-color: white;
+  /* background-color: white; */
+  background-image: url('prototype_survey/survey_start.png');
 }
 
 ::-webkit-scrollbar {

@@ -38,6 +38,14 @@ export class Action {
         this.scene.sprite.tint = 0x00FF00; // green
         this.scene.sprite.rotation = 0;
       },
+      SURVEY_START: (data) => {
+        this.scene.next_background = true;
+        this.scene.background_idx = data.background_idx;
+      },
+      YES_NO: (data) => {
+        this.scene.next_background = data.next;
+        this.scene.background_idx = data.background_idx;
+      },
     };
     this.commands.TINT.bind(this);
     this.commands.SPIN.bind(this);
